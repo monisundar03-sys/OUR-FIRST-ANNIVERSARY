@@ -3,925 +3,783 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Our Little Treasure Hunt ❤️</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-family:Georgia,serif;
+color:white;
+background:
+radial-gradient(circle at top,#64243f,transparent 45%),
+linear-gradient(135deg,#10070d,#32101f,#10070d);
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    font-family: Georgia, serif;
-    color: white;
-
-    background:
-        radial-gradient(circle at top, #64243f, transparent 45%),
-        linear-gradient(135deg, #10070d, #32101f, #10070d);
+.container{
+width:90%;
+max-width:650px;
+padding:30px 0;
 }
 
-.container {
-    width: 90%;
-    max-width: 650px;
-    position: relative;
-    z-index: 2;
-    padding: 30px 0;
+.heart{
+font-size:48px;
+animation:heartbeat 1.5s infinite;
 }
 
-.heart {
-    font-size: 48px;
-    animation: heartbeat 1.5s infinite;
+h1{
+font-size:clamp(30px,8vw,50px);
+margin:15px 0;
 }
 
-h1 {
-    font-size: clamp(30px, 8vw, 50px);
-    margin: 15px 0;
+.card{
+margin-top:30px;
+padding:30px 22px;
+border-radius:25px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,200,220,.18);
+box-shadow:0 0 30px rgba(255,120,170,.12);
+backdrop-filter:blur(8px);
 }
 
-.card {
-    margin-top: 30px;
-    padding: 30px 22px;
-    border-radius: 25px;
-
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,200,220,.18);
-
-    box-shadow: 0 0 30px rgba(255,120,170,.12);
-
-    backdrop-filter: blur(8px);
+.clue-number{
+color:#ffb5cf;
+letter-spacing:4px;
+font-size:13px;
+margin-bottom:18px;
 }
 
-.clue-number {
-    color: #ffb5cf;
-    letter-spacing: 4px;
-    font-size: 13px;
-    margin-bottom: 18px;
+h2{color:#ffd5e3}
+
+.clue{
+font-size:19px;
+line-height:1.8;
 }
 
-h2 {
-    color: #ffd5e3;
+.hint{
+margin-top:20px;
+color:#e8b9cb;
+font-size:15px;
 }
 
-.clue {
-    font-size: 19px;
-    line-height: 1.8;
+input{
+width:90%;
+max-width:450px;
+margin-top:25px;
+padding:15px;
+border:none;
+border-radius:30px;
+text-align:center;
+font-size:16px;
+outline:none;
 }
 
-.hint {
-    margin-top: 20px;
-    color: #e8b9cb;
-    font-size: 15px;
+button,.button{
+display:inline-block;
+margin-top:18px;
+padding:15px 28px;
+border:none;
+border-radius:50px;
+background:linear-gradient(135deg,#ffb4cf,#f58fb3);
+color:#351020;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+text-decoration:none;
 }
 
-input {
-    width: 90%;
-    max-width: 450px;
-
-    margin-top: 25px;
-    padding: 15px;
-
-    border: none;
-    border-radius: 30px;
-
-    text-align: center;
-    font-size: 16px;
-
-    outline: none;
+.message{
+margin-top:18px;
+min-height:30px;
 }
 
-button,
-.button {
-    display: inline-block;
+.success{color:#baffd0}
+.wrong{color:#ffb3c5}
 
-    margin-top: 18px;
-    padding: 15px 28px;
-
-    border: none;
-    border-radius: 50px;
-
-    background: linear-gradient(
-        135deg,
-        #ffb4cf,
-        #f58fb3
-    );
-
-    color: #351020;
-
-    font-weight: bold;
-    font-size: 16px;
-
-    cursor: pointer;
-    text-decoration: none;
+.progress{
+margin-top:20px;
+color:#e9b7c9;
+font-size:14px;
 }
 
-.message {
-    margin-top: 18px;
-    min-height: 30px;
+.locked{
+color:#e9b7c9;
+font-size:17px;
+line-height:1.7;
 }
 
-.success {
-    color: #baffd0;
+.floating-heart{
+position:fixed;
+bottom:-40px;
+color:rgba(255,180,210,.65);
+font-size:20px;
+animation:floatUp linear forwards;
+pointer-events:none;
 }
 
-.wrong {
-    color: #ffb3c5;
+@keyframes floatUp{
+from{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+10%{opacity:1}
+to{
+transform:translateY(-110vh) rotate(360deg);
+opacity:0;
+}
 }
 
-.progress {
-    margin-top: 20px;
-    color: #e9b7c9;
-    font-size: 14px;
-}
-
-.locked {
-    color: #e9b7c9;
-    font-size: 17px;
-    line-height: 1.7;
-}
-
-.floating-heart {
-    position: fixed;
-    bottom: -40px;
-
-    color: rgba(255,180,210,.65);
-
-    font-size: 20px;
-
-    animation: floatUp linear forwards;
-
-    pointer-events: none;
-}
-
-@keyframes floatUp {
-
-    from {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    to {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-@keyframes heartbeat {
-
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
+@keyframes heartbeat{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.2)}
 }
 </style>
 </head>
-
 
 <body>
 
 <div class="container">
 
-    <div class="heart">❤️</div>
+<div class="heart">❤️</div>
 
-    <h1>Our Little Treasure Hunt</h1>
+<h1>Our Little Treasure Hunt</h1>
 
-    <div class="card" id="content"></div>
+<div class="card" id="content"></div>
 
 </div>
 
-
 <script>
 
-/* =====================================================
-   CLUES
-   ===================================================== */
+/* =================================================
+   YOUR 8 CLUES
+   ================================================= */
 
 const clues = [
 
 {
-    date: "2026-08-20",
+date:"2026-08-20",
+number:"CLUE 1",
+title:"🐺 THE ONE WHO MADE ME CRY",
 
-    number: "CLUE 1",
+text:`
+Out of all the deaths in Game of Thrones,
+which completely insignificant little character's
+death had me sitting there like 😭?
+`,
 
-    title: "🐺 THE ONE WHO MADE ME CRY",
+hint:`Hint: Jon Snow knows nothing… but you should know this. 😂❤️`,
 
-    text: `
-    Out of all the deaths in Game of Thrones,
-    which completely insignificant little character's
-    death had me sitting there like 😭?
-    `,
-
-    hint: `
-    Hint: Jon Snow knows nothing… but you should know this. 😂❤️
-    `,
-
-    answers: [
-        "olly"
-    ]
+answers:["olly"]
 },
 
-
 {
-    date: "2026-08-21",
+date:"2026-08-21",
+number:"CLUE 2",
+title:"🌴 THE PLACE",
 
-    number: "CLUE 2",
+text:`
+If our love story had a vacation chapter,
+where would you find it? 🌴❤️
+`,
 
-    title: "🌴 THE PLACE",
+hint:`Hint: It was our honeymoon destination.`,
 
-    text: `
-    If our love story had a vacation chapter,
-    where would you find it? 🌴❤️
-    `,
-
-    hint: `
-    Hint: It was our honeymoon destination.
-    `,
-
-    answers: [
-        "pollachi"
-    ]
+answers:["pollachi"]
 },
 
-
 {
-    date: "2026-08-22",
+date:"2026-08-22",
+number:"CLUE 3",
+title:"💕 THE NAMES",
 
-    number: "CLUE 3",
+text:`
+Everyone knows my real name…
+but you decided I needed two more. 😂
 
-    title: "💕 THE NAMES",
+What are the two names you gave me?
+`,
 
-    text: `
-    Everyone knows my real name…
-    but you decided I needed two more. 😂
+hint:`Hint: You know them better than anyone.`,
 
-    What are the two names you gave me?
-    `,
-
-    hint: `
-    Hint: You know them better than anyone.
-    `,
-
-    answers: [
-        "pops and monican",
-        "pops + monican",
-        "pops monican"
-    ]
+answers:[
+"pops and monican",
+"pops + monican",
+"pops monican"
+]
 },
 
-
 {
-    date: "2026-08-23",
+date:"2026-08-23",
+number:"CLUE 4",
+title:"📍 WHERE IT ALL STARTED",
 
-    number: "CLUE 4",
+text:`
+Before the honeymoon, before the nicknames,
+before all these memories…
 
-    title: "📍 WHERE IT ALL STARTED",
+there was a place where our story quietly began. ❤️
 
-    text: `
-    Before the honeymoon, before the nicknames,
-    before all these memories…
+You were the one who sent me the link to that place.
 
-    there was a place where our story quietly began. ❤️
+Where was it?
+`,
 
-    You were the one who sent me the link to that place.
+hint:`Hint: Think about where our story started.`,
 
-    Where was it?
-    `,
-
-    hint: `
-    Hint: Think about where our story started.
-    `,
-
-    answers: [
-        "indian bank kallakurichi",
-        "indian bank, kallakurichi",
-        "indian bank kallakurichi branch"
-    ]
+answers:[
+"indian bank kallakurichi",
+"indian bank, kallakurichi",
+"indian bank kallakurichi branch"
+]
 },
 
-
 {
-    date: "2026-08-24",
+date:"2026-08-24",
+number:"CLUE 5",
+title:"♾️ THE FIRST GIFT",
 
-    number: "CLUE 5",
+text:`
+Remember the first gift I gave you? 👀
 
-    title: "♾️ THE FIRST GIFT",
+The one that mysteriously disappeared from your life… 😂
 
-    text: `
-    Remember the first gift I gave you? 👀
+What did it say?
+`,
 
-    The one that mysteriously disappeared from your life… 😂
+hint:`Hint: A little reminder that has no end. ♾️`,
 
-    What did it say?
-    `,
-
-    hint: `
-    Hint: A little reminder that has no end. ♾️
-    `,
-
-    answers: [
-        "to infinity and beyond"
-    ]
+answers:[
+"to infinity and beyond"
+]
 },
 
-
 {
-    date: "2026-08-25",
+date:"2026-08-25",
+number:"CLUE 6",
+title:"🤍 THE WHITE SHIRT",
 
-    number: "CLUE 6",
+text:`
+There’s one particular look of yours
+that I’ve told you about more than once… 👀
 
-    title: "🤍 THE WHITE SHIRT",
+The one I keep replaying in my head.
 
-    text: `
-    There’s one particular look of yours
-    that I’ve told you about more than once… 👀
+What am I talking about?
+`,
 
-    The one I keep replaying in my head.
+hint:`Hint: Think of that one look you keep talking about. 🤍`,
 
-    What am I talking about?
-    `,
-
-    hint: `
-    Hint: Think of that one look you keep talking about. 🤍
-    `,
-
-    answers: [
-        "chest hair white shirt",
-        "chest hair whiteshirt",
-        "chest hair in white shirt",
-        "your chest hair showing through your white shirt"
-    ]
+answers:[
+"chest hair white shirt",
+"chest hair whiteshirt",
+"chest hair in white shirt",
+"your chest hair showing through your white shirt"
+]
 },
 
-
 {
-    date: "2026-08-26",
+date:"2026-08-26",
+number:"CLUE 7",
+title:"💵 THE DENOMINATION",
 
-    number: "CLUE 7",
+text:`
+You taught me so many things at work…
 
-    title: "💵 THE DENOMINATION",
+Which cash denomination do I use the least?
+`,
 
-    text: `
-    You taught me so many things at work…
+hint:`Hint: Think about all those days we've spent handling cash together. 😏`,
 
-    Which cash denomination do I use the least?
-    `,
-
-    hint: `
-    Hint: Think about all those days we've spent handling cash together. 😏
-    `,
-
-    answers: [
-        "200",
-        "₹200",
-        "rs 200",
-        "rs. 200"
-    ]
+answers:[
+"200",
+"₹200",
+"rs 200",
+"rs. 200"
+]
 },
 
-
 {
-    date: "2026-08-27",
+date:"2026-08-27",
+number:"CLUE 8",
+title:"🏡 THE FUTURE",
 
-    number: "CLUE 8",
+text:`
+After everything we've built together… ❤️
 
-    title: "🏡 THE FUTURE",
+If our little family grows one day,
+there's one little dream I carry in my heart.
 
-    text: `
-    After everything we've built together… ❤️
+What do you think I'd wish for? 🥹
+`,
 
-    If our little family grows one day,
-    there's one little dream I carry in my heart.
+hint:`Hint: Think of someone very special to me… and a tiny version of him. ❤️`,
 
-    What do you think I'd wish for? 🥹
-    `,
-
-    hint: `
-    Hint: Think of someone very special to me…
-    and a tiny version of him. ❤️
-    `,
-
-    answers: [
-        "a son like you",
-        "son like you"
-    ]
+answers:[
+"a son like you",
+"son like you"
+]
 }
 
 ];
 
 
-/* =====================================================
-   SAVED PROGRESS
-   ===================================================== */
+/* =================================================
+   NEW STORAGE KEY
+   ================================================= */
+
+const STORAGE_KEY = "ourAnniversaryHunt_v3";
 
 let solved = JSON.parse(
-    localStorage.getItem("anniversarySolved") || "[]"
+localStorage.getItem(STORAGE_KEY) || "[]"
 );
 
 
-/* =====================================================
+/* =================================================
    NORMALISE ANSWERS
-   ===================================================== */
+   ================================================= */
 
-function normalise(value) {
+function normalise(value){
 
-    return value
-        .toLowerCase()
-        .trim()
-        .replace(/[.,!?₹]/g, "")
-        .replace(/\s+/g, " ");
-
-}
-
-
-/* =====================================================
-   GET INDIA DATE
-   ===================================================== */
-
-function getIndiaDate() {
-
-    const now = new Date();
-
-    const indiaString =
-        now.toLocaleString(
-            "en-US",
-            {
-                timeZone: "Asia/Kolkata"
-            }
-        );
-
-    return new Date(indiaString);
-}
-
-
-/* =====================================================
-   FIND TODAY'S CLUE
-   ===================================================== */
-
-function getTodayIndex() {
-
-    const indiaDate =
-        getIndiaDate();
-
-    const year =
-        indiaDate.getFullYear();
-
-    const month =
-        String(
-            indiaDate.getMonth() + 1
-        ).padStart(2, "0");
-
-    const day =
-        String(
-            indiaDate.getDate()
-        ).padStart(2, "0");
-
-    const today =
-        `${year}-${month}-${day}`;
-
-
-    return clues.findIndex(
-        clue => clue.date === today
-    );
+return value
+.toLowerCase()
+.trim()
+.replace(/[.,!?₹]/g,"")
+.replace(/\s+/g," ");
 
 }
 
 
-/* =====================================================
+/* =================================================
+   INDIA DATE
+   ================================================= */
+
+function getIndiaDate(){
+
+return new Date(
+new Date().toLocaleString(
+"en-US",
+{timeZone:"Asia/Kolkata"}
+)
+);
+
+}
+
+
+/* =================================================
+   TODAY
+   ================================================= */
+
+function getToday(){
+
+const date=getIndiaDate();
+
+const y=date.getFullYear();
+
+const m=String(
+date.getMonth()+1
+).padStart(2,"0");
+
+const d=String(
+date.getDate()
+).padStart(2,"0");
+
+return `${y}-${m}-${d}`;
+
+}
+
+
+/* =================================================
    SHOW PAGE
-   ===================================================== */
+   ================================================= */
 
-function showPage() {
+function showPage(){
 
-    const content =
-        document.getElementById("content");
+const content=
+document.getElementById("content");
 
-    const indiaDate =
-        getIndiaDate();
-
-    const year =
-        indiaDate.getFullYear();
-
-    const month =
-        String(
-            indiaDate.getMonth() + 1
-        ).padStart(2, "0");
-
-    const day =
-        String(
-            indiaDate.getDate()
-        ).padStart(2, "0");
-
-    const today =
-        `${year}-${month}-${day}`;
+const today=getToday();
 
 
-    /* -----------------------------------------------
-       BEFORE AUGUST 20
-       ----------------------------------------------- */
+/* BEFORE AUGUST 20 */
 
-    if (today < "2026-08-20") {
+if(today<"2026-08-20"){
 
-        content.innerHTML = `
+content.innerHTML=`
 
-            <div class="clue-number">
-                SOMETHING IS COMING ❤️
-            </div>
+<div class="clue-number">
+SOMETHING IS COMING ❤️
+</div>
 
-            <div class="locked">
-                Your first clue isn't ready yet… 🥹
-                <br><br>
-                Come back on August 20.
-            </div>
+<div class="locked">
+Your first clue isn't ready yet… 🥹
+<br><br>
+Come back on August 20.
+</div>
 
-        `;
+`;
 
-        return;
-    }
-
-
-    /* -----------------------------------------------
-       AUGUST 28 OR LATER
-       ----------------------------------------------- */
-
-    if (today >= "2026-08-28") {
-
-        if (solved.length === 8) {
-
-            showFinal();
-
-        } else {
-
-            content.innerHTML = `
-
-                <div class="clue-number">
-                    ❤️ ALMOST THERE
-                </div>
-
-                <div class="locked">
-
-                    The treasure is waiting… 🥹
-
-                    <br><br>
-
-                    Complete all eight clues
-                    to unlock it.
-
-                    <div class="progress">
-                        ${solved.length} / 8 clues solved
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-
-        return;
-    }
-
-
-    /* -----------------------------------------------
-       FIND TODAY'S CLUE
-       ----------------------------------------------- */
-
-    const index =
-        getTodayIndex();
-
-
-    if (index === -1) {
-
-        content.innerHTML = `
-
-            <div class="locked">
-                Come back tomorrow for
-                the next piece of our story. ❤️
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    /* -----------------------------------------------
-       ALREADY SOLVED TODAY
-       ----------------------------------------------- */
-
-    if (solved.includes(index)) {
-
-        content.innerHTML = `
-
-            <div class="clue-number">
-                ❤️ CLUE UNLOCKED
-            </div>
-
-            <div class="clue">
-
-                You got today's memory! 🥹
-
-                <br><br>
-
-                Come back tomorrow
-                for the next one.
-
-            </div>
-
-            <div class="progress">
-                ${solved.length} / 8 clues solved ❤️
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    /* -----------------------------------------------
-       SHOW TODAY'S CLUE
-       ----------------------------------------------- */
-
-    showClue(index);
+return;
 
 }
 
 
-/* =====================================================
+/* AUGUST 28+ */
+
+if(today>="2026-08-28"){
+
+if(solved.length===8){
+
+showFinal();
+
+}else{
+
+content.innerHTML=`
+
+<div class="clue-number">
+❤️ ALMOST THERE
+</div>
+
+<div class="locked">
+
+The treasure is waiting… 🥹
+
+<br><br>
+
+Complete all eight clues to unlock it.
+
+<div class="progress">
+${solved.length} / 8 clues solved
+</div>
+
+</div>
+
+`;
+
+}
+
+return;
+
+}
+
+
+/* FIND TODAY'S CLUE */
+
+const index=
+clues.findIndex(
+clue=>clue.date===today
+);
+
+
+if(index===-1){
+
+content.innerHTML=`
+
+<div class="locked">
+Come back tomorrow for the next piece
+of our story. ❤️
+</div>
+
+`;
+
+return;
+
+}
+
+
+/* ALREADY SOLVED */
+
+if(solved.includes(index)){
+
+content.innerHTML=`
+
+<div class="clue-number">
+❤️ CLUE UNLOCKED
+</div>
+
+<div class="clue">
+
+You got today's memory! 🥹
+
+<br><br>
+
+Come back tomorrow for the next one.
+
+</div>
+
+<div class="progress">
+${solved.length} / 8 clues solved ❤️
+</div>
+
+`;
+
+return;
+
+}
+
+
+/* SHOW CLUE */
+
+showClue(index);
+
+}
+
+
+/* =================================================
    SHOW CLUE
-   ===================================================== */
+   ================================================= */
 
-function showClue(index) {
+function showClue(index){
 
-    const content =
-        document.getElementById("content");
+const content=
+document.getElementById("content");
 
-    const clue =
-        clues[index];
+const clue=clues[index];
 
+content.innerHTML=`
 
-    content.innerHTML = `
+<div class="clue-number">
+${clue.number}
+</div>
 
-        <div class="clue-number">
-            ${clue.number}
-        </div>
+<h2>
+${clue.title}
+</h2>
 
-        <h2>
-            ${clue.title}
-        </h2>
+<div class="clue">
+${clue.text}
+</div>
 
-        <div class="clue">
-            ${clue.text}
-        </div>
+<div class="hint">
+${clue.hint}
+</div>
 
-        <div class="hint">
-            ${clue.hint}
-        </div>
+<input
+id="answer"
+type="text"
+placeholder="Type your answer..."
+autocomplete="off"
+>
 
-        <input
-            id="answer"
-            type="text"
-            placeholder="Type your answer..."
-            autocomplete="off"
-        >
+<br>
 
-        <br>
+<button onclick="checkAnswer(${index})">
+🔓 UNLOCK
+</button>
 
-        <button onclick="checkAnswer(${index})">
-            🔓 UNLOCK
-        </button>
+<div id="message" class="message"></div>
 
-        <div
-            id="message"
-            class="message">
-        </div>
+<div class="progress">
+${solved.length} / 8 clues solved ❤️
+</div>
 
-        <div class="progress">
-            ${solved.length} / 8 clues solved ❤️
-        </div>
-
-    `;
+`;
 
 }
 
 
-/* =====================================================
+/* =================================================
    CHECK ANSWER
-   ===================================================== */
+   ================================================= */
 
-function checkAnswer(index) {
+function checkAnswer(index){
 
-    const clue =
-        clues[index];
+const clue=clues[index];
 
-    const input =
-        document.getElementById("answer");
+const input=
+document.getElementById("answer");
 
-    const message =
-        document.getElementById("message");
+const message=
+document.getElementById("message");
 
-    const userAnswer =
-        normalise(input.value);
+const userAnswer=
+normalise(input.value);
 
-
-    const correct =
-        clue.answers.some(
-            answer =>
-            normalise(answer) === userAnswer
-        );
+const correct=
+clue.answers.some(
+answer=>
+normalise(answer)===userAnswer
+);
 
 
-    if (correct) {
+if(correct){
 
-        if (!solved.includes(index)) {
+if(!solved.includes(index)){
 
-            solved.push(index);
+solved.push(index);
 
-            solved.sort(
-                (a, b) => a - b
-            );
+solved.sort(
+(a,b)=>a-b
+);
 
-            localStorage.setItem(
-                "anniversarySolved",
-                JSON.stringify(solved)
-            );
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(solved)
+);
 
-        }
+}
 
+message.className=
+"message success";
 
-        message.className =
-            "message success";
+message.innerHTML=
+"🎉 Correct! ❤️";
 
-        message.innerHTML =
-            "🎉 Correct! ❤️";
+input.disabled=true;
 
+setTimeout(
+showPage,
+1300
+);
 
-        input.disabled = true;
+}else{
 
+message.className=
+"message wrong";
 
-        setTimeout(
-            showPage,
-            1300
-        );
+message.innerHTML=
+"Hmm… 😏 That's not it. Try again ❤️";
 
-
-    } else {
-
-        message.className =
-            "message wrong";
-
-        message.innerHTML =
-            "Hmm… 😏 That's not it. Try again ❤️";
-
-    }
+}
 
 }
 
 
-/* =====================================================
-   FINAL TREASURE
-   ===================================================== */
+/* =================================================
+   FINAL
+   ================================================= */
 
-function showFinal() {
+function showFinal(){
 
-    const content =
-        document.getElementById("content");
+const content=
+document.getElementById("content");
 
+content.innerHTML=`
 
-    content.innerHTML = `
+<div class="clue-number">
+🎉 YOU FOUND THE TREASURE 🎉
+</div>
 
-        <div class="clue-number">
-            🎉 YOU FOUND THE TREASURE 🎉
-        </div>
+<div class="clue">
 
-        <div class="clue">
+You solved every clue…<br><br>
 
-            You solved every clue…<br><br>
+but the real treasure was you all along. ❤️
 
-            but the real treasure was you all along. ❤️
+<br><br>
 
-            <br><br>
+<strong>
+Happy 1st Anniversary, Sheshi.
+</strong>
 
-            <strong>
-            Happy 1st Anniversary, Sheshi.
-            </strong>
+<br><br>
 
-            <br><br>
+Here's to our little family,
+our little world,
+and everything still waiting for us. ♾️
 
-            Here's to our little family,
-            our little world,
-            and everything still waiting for us. ♾️
+</div>
 
-        </div>
+<a
+class="button"
+href="canvas_our-story-260818_1459.pdf"
+target="_blank">
 
+💌 OPEN YOUR SURPRISE
 
-        <a
-            class="button"
-            href="canvas_our-story-260818_1459.pdf"
-            target="_blank">
+</a>
 
-            💌 OPEN YOUR SURPRISE
+<div class="progress">
+8 / 8 clues solved ❤️
+</div>
 
-        </a>
-
-
-        <div class="progress">
-            8 / 8 clues solved ❤️
-        </div>
-
-    `;
+`;
 
 }
 
 
-/* =====================================================
+/* =================================================
    ENTER KEY
-   ===================================================== */
+   ================================================= */
 
 document.addEventListener(
-    "keydown",
-    function(event) {
+"keydown",
+function(event){
 
-        if (event.key === "Enter") {
+if(event.key==="Enter"){
 
-            const input =
-                document.getElementById("answer");
+const input=
+document.getElementById("answer");
 
-            if (input) {
+if(input){
 
-                const index =
-                    getTodayIndex();
+const index=
+clues.findIndex(
+clue=>clue.date===getToday()
+);
 
-                if (index >= 0) {
-                    checkAnswer(index);
-                }
+if(index>=0){
+checkAnswer(index);
+}
 
-            }
+}
 
-        }
+}
 
-    }
+}
 );
 
 
-/* =====================================================
+/* =================================================
    START
-   ===================================================== */
+   ================================================= */
 
 showPage();
 
 
-/* =====================================================
+/* =================================================
    FLOATING HEARTS
-   ===================================================== */
+   ================================================= */
 
-function createHeart() {
+function createHeart(){
 
-    const heart =
-        document.createElement("div");
+const heart=
+document.createElement("div");
 
-    heart.className =
-        "floating-heart";
+heart.className=
+"floating-heart";
 
-    heart.innerHTML =
-        Math.random() > 0.5
-        ? "❤️"
-        : "♡";
+heart.innerHTML=
+Math.random()>0.5
+?"❤️"
+:"♡";
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+heart.style.left=
+Math.random()*100+"vw";
 
-    heart.style.fontSize =
-        (15 + Math.random() * 20) + "px";
+heart.style.fontSize=
+(15+Math.random()*20)+"px";
 
-    heart.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
+heart.style.animationDuration=
+(5+Math.random()*5)+"s";
 
-    document.body.appendChild(heart);
+document.body.appendChild(heart);
 
-    setTimeout(
-        () => heart.remove(),
-        10000
-    );
+setTimeout(
+()=>heart.remove(),
+10000
+);
 
 }
 
 setInterval(
-    createHeart,
-    700
+createHeart,
+700
 );
 
 </script>
