@@ -45,24 +45,13 @@ h1 {
     margin: 15px 0;
 }
 
-.subtitle {
-    color: #f9dce8;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
 .card {
     margin-top: 30px;
     padding: 30px 22px;
     border-radius: 25px;
-
     background: rgba(255,255,255,.08);
     border: 1px solid rgba(255,200,220,.18);
-
-    box-shadow:
-        0 0 30px rgba(255,120,170,.12),
-        inset 0 0 30px rgba(255,255,255,.03);
-
+    box-shadow: 0 0 30px rgba(255,120,170,.12);
     backdrop-filter: blur(8px);
 }
 
@@ -73,24 +62,60 @@ h1 {
     margin-bottom: 18px;
 }
 
+h2 {
+    color: #ffd5e3;
+}
+
 .clue {
-    font-size: 20px;
+    font-size: 19px;
     line-height: 1.8;
 }
 
 .hint {
-    margin-top: 22px;
+    margin-top: 20px;
     color: #e8b9cb;
     font-size: 15px;
 }
 
-.answer {
+input {
+    width: 90%;
+    max-width: 450px;
     margin-top: 25px;
-    padding: 14px;
-    border-radius: 15px;
-    background: rgba(255,180,210,.12);
-    color: #ffdce9;
-    font-size: 14px;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 16px;
+    outline: none;
+}
+
+button,
+.button {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 15px 28px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ffb4cf, #f58fb3);
+    color: #351020;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.message {
+    margin-top: 18px;
+    min-height: 25px;
+    color: #ffd5e3;
+}
+
+.success {
+    color: #baffd0;
+}
+
+.wrong {
+    color: #ffb3c5;
 }
 
 .countdown {
@@ -99,35 +124,11 @@ h1 {
     font-size: 17px;
 }
 
-.locked {
-    color: #e5b8ca;
-    line-height: 1.8;
-}
-
-.button {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 17px 30px;
-
-    background: linear-gradient(135deg, #ffb4cf, #f58fb3);
-    color: #351020;
-
-    text-decoration: none;
-    border-radius: 50px;
-
-    font-weight: bold;
-    font-size: 17px;
-
-    box-shadow: 0 0 30px rgba(255,150,190,.45);
-}
-
 .small {
     margin-top: 25px;
     color: #dcb8c7;
     font-size: 14px;
 }
-
-/* Floating hearts */
 
 .floating-heart {
     position: fixed;
@@ -139,7 +140,6 @@ h1 {
 }
 
 @keyframes floatUp {
-
     from {
         transform: translateY(0) rotate(0deg);
         opacity: 0;
@@ -156,7 +156,6 @@ h1 {
 }
 
 @keyframes heartbeat {
-
     0%,100% {
         transform: scale(1);
     }
@@ -172,199 +171,172 @@ h1 {
 
 <div class="container">
 
-    <div class="heart">❤️</div>
+<div class="heart">❤️</div>
 
-    <h1>Our Little Treasure Hunt</h1>
+<h1>Our Little Treasure Hunt</h1>
 
-    <div class="subtitle">
-        8 days. 8 little pieces of us.<br>
-        Let's see if you remember them all. 🥹
-    </div>
-
-    <div class="card" id="content"></div>
+<div class="card" id="content"></div>
 
 </div>
 
-
 <script>
 
-/*
-==================================================
-ANNIVERSARY TREASURE HUNT
-IST = UTC + 5:30
-==================================================
-*/
+/* =========================
+   TREASURE HUNT
+   ========================= */
 
 const clues = [
 
-    {
-        date: "2026-08-20",
-        number: "CLUE 1",
-        title: "🐺 THE ONE WHO MADE ME CRY",
-        text: `
-        “Out of all the deaths in Game of Thrones,
-        which completely insignificant little character's
-        death had me sitting there like 😭?”
-        `,
-        hint: "Hint: Jon Snow knows nothing… but you should know this. 😂❤️",
-        answer: "OLLY"
-    },
+{
+date: "2026-08-20",
+number: "CLUE 1",
+title: "🐺 THE ONE WHO MADE ME CRY",
+text: `Out of all the deaths in Game of Thrones,
+which completely insignificant little character's
+death had me sitting there like 😭?`,
+hint: "Hint: Jon Snow knows nothing… but you should know this. 😂❤️",
+answers: ["olly"]
+},
 
-    {
-        date: "2026-08-21",
-        number: "CLUE 2",
-        title: "🌴 THE PLACE",
-        text: `
-        “If our love story had a vacation chapter,
-        where would you find it? 🌴❤️”
-        `,
-        hint: "Hint: It was our honeymoon destination.",
-        answer: "POLLACHI"
-    },
+{
+date: "2026-08-21",
+number: "CLUE 2",
+title: "🌴 THE PLACE",
+text: `If our love story had a vacation chapter,
+where would you find it? 🌴❤️`,
+hint: "Hint: It was our honeymoon destination.",
+answers: ["pollachi"]
+},
 
-    {
-        date: "2026-08-22",
-        number: "CLUE 3",
-        title: "💕 THE NAMES",
-        text: `
-        “Everyone knows my real name…
-        but you decided I needed two more. 😂
+{
+date: "2026-08-22",
+number: "CLUE 3",
+title: "💕 THE NAMES",
+text: `Everyone knows my real name…
+but you decided I needed two more. 😂
 
-        What are the two names you gave me?”
-        `,
-        hint: "Hint: You know them better than anyone.",
-        answer: "POPS + MONICAN"
-    },
+What are the two names you gave me?`,
+hint: "Hint: You know them better than anyone.",
+answers: [
+    "pops and monican",
+    "pops + monican",
+    "pops monican"
+]
+},
 
-    {
-        date: "2026-08-23",
-        number: "CLUE 4",
-        title: "📍 WHERE IT ALL STARTED",
-        text: `
-        “Before the honeymoon, before the nicknames,
-        before all these memories…
+{
+date: "2026-08-23",
+number: "CLUE 4",
+title: "📍 WHERE IT ALL STARTED",
+text: `Before the honeymoon, before the nicknames,
+before all these memories…
 
-        there was a place where our story quietly began. ❤️
+there was a place where our story quietly began. ❤️
 
-        You were the one who sent me the link to that place.
+You were the one who sent me the link to that place.
 
-        Where was it?”
-        `,
-        hint: "Enter the place name.",
-        answer: "KALLAKURICHI"
-    },
+Where was it?`,
+hint: "Enter the place name.",
+answers: ["kallakurichi"]
+},
 
-    {
-        date: "2026-08-24",
-        number: "CLUE 5",
-        title: "♾️ THE FIRST GIFT",
-        text: `
-        “Remember the first gift I gave you? 👀
+{
+date: "2026-08-24",
+number: "CLUE 5",
+title: "♾️ THE FIRST GIFT",
+text: `Remember the first gift I gave you? 👀
 
-        The one that mysteriously disappeared from your life… 😂
+The one that mysteriously disappeared from your life… 😂
 
-        What was it?”
-        `,
-        hint: "Hint: To infinity… and beyond. ♾️",
-        answer: "THE KEYCHAIN"
-    },
+What was it?`,
+hint: "Hint: To infinity… and beyond. ♾️",
+answers: [
+    "to infinity and beyond"
+]
+},
 
-    {
-        date: "2026-08-25",
-        number: "CLUE 6",
-        title: "🤍 THE WHITE SHIRT",
-        text: `
-        “There’s one particular look of yours
-        that I’ve told you about more than once… 👀
+{
+date: "2026-08-25",
+number: "CLUE 6",
+title: "🤍 THE WHITE SHIRT",
+text: `There’s one particular look of yours
+that I’ve told you about more than once… 👀
 
-        The one I keep replaying in my head.
+The one I keep replaying in my head.
 
-        What am I talking about?”
-        `,
-        hint: "Hint: Think white shirt. 🤍",
-        answer: "YOUR CHEST HAIR SHOWING THROUGH YOUR WHITE SHIRT"
-    },
+What am I talking about?`,
+hint: "Hint: Think white shirt. 🤍",
+answers: [
+    "chest hair white shirt",
+    "chest hair whiteshirt",
+    "chest hair in white shirt",
+    "your chest hair showing through your white shirt"
+]
+},
 
-    {
-        date: "2026-08-26",
-        number: "CLUE 7",
-        title: "💵 THE DENOMINATION",
-        text: `
-        “You taught me so many things at work…
+{
+date: "2026-08-26",
+number: "CLUE 7",
+title: "💵 THE DENOMINATION",
+text: `You taught me so many things at work…
 
-        Which cash denomination do I use the least?”
-        `,
-        hint: "Think about all those days we've spent handling cash together. 😏",
-        answer: "₹200"
-    },
+Which cash denomination do I use the least?`,
+hint: "Think about all those days we've spent handling cash together. 😏",
+answers: [
+    "200",
+    "₹200",
+    "rs 200",
+    "rs. 200"
+]
+},
 
-    {
-        date: "2026-08-27",
-        number: "CLUE 8",
-        title: "🏡 THE FUTURE",
-        text: `
-        “If our little family grows one day,
-        what would I wish for?
+{
+date: "2026-08-27",
+number: "CLUE 8",
+title: "🏡 THE FUTURE",
+text: `If our little family grows one day,
+what would I wish for?
 
-        Not just a son…
+Not just a son…
 
-        but a son like you. 🥹❤️”
-        `,
-        hint: "One final answer.",
-        answer: "A SON LIKE YOU"
-    }
+but a son like you. 🥹❤️`,
+hint: "One final answer.",
+answers: [
+    "a son like you",
+    "son like you"
+]
+}
 
 ];
 
 
-/*
-Get current IST date
-*/
+/* =========================
+   DATE / TIME
+   ========================= */
 
 function getISTDate() {
 
-    const now = new Date();
-
     return new Date(
-        now.toLocaleString("en-US", {
+        new Date().toLocaleString("en-US", {
             timeZone: "Asia/Kolkata"
         })
     );
 }
 
 
-/*
-Format countdown
-*/
+function normalise(value) {
 
-function formatTime(milliseconds) {
-
-    if (milliseconds <= 0) {
-        return "00d 00h 00m 00s";
-    }
-
-    const totalSeconds =
-        Math.floor(milliseconds / 1000);
-
-    const days =
-        Math.floor(totalSeconds / 86400);
-
-    const hours =
-        Math.floor((totalSeconds % 86400) / 3600);
-
-    const minutes =
-        Math.floor((totalSeconds % 3600) / 60);
-
-    const seconds =
-        totalSeconds % 60;
-
-    return `${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
+    return value
+        .toLowerCase()
+        .trim()
+        .replace(/[.,!?₹]/g, "")
+        .replace(/\s+/g, " ");
 }
 
 
-/*
-Find today's clue
-*/
+/* =========================
+   FIND TODAY'S CLUE
+   ========================= */
 
 function getCurrentClue() {
 
@@ -385,9 +357,9 @@ function getCurrentClue() {
 }
 
 
-/*
-Show page
-*/
+/* =========================
+   SHOW PAGE
+   ========================= */
 
 function updatePage() {
 
@@ -400,49 +372,30 @@ function updatePage() {
     const today =
         ist.toISOString().split("T")[0];
 
-    /*
-    BEFORE AUG 20
-    */
+
+    /* BEFORE AUGUST 20 */
 
     if (today < "2026-08-20") {
 
-        const firstClue =
-            new Date("2026-08-20T00:00:00+05:30");
-
-        const now =
-            new Date();
-
-        const difference =
-            firstClue.getTime() - now.getTime();
-
         content.innerHTML = `
-
             <div class="clue-number">
                 SOMETHING IS COMING ❤️
             </div>
 
             <div class="clue">
-                Your first clue isn't ready yet…
-                🥹
-            </div>
-
-            <div class="countdown">
-                ${formatTime(difference)}
+                Your first clue isn't ready yet… 🥹
             </div>
 
             <div class="small">
                 Come back on August 20.
             </div>
-
         `;
 
         return;
     }
 
 
-    /*
-    AUGUST 28 = FINAL SURPRISE
-    */
+    /* AUGUST 28 = FINAL */
 
     if (today >= "2026-08-28") {
 
@@ -480,22 +433,20 @@ function updatePage() {
                 💌 OPEN YOUR SURPRISE
 
             </a>
-
         `;
 
         return;
     }
 
 
-    /*
-    SHOW CURRENT CLUE
-    */
+    /* TODAY'S CLUE */
 
     const index =
         getCurrentClue();
 
     const clue =
         clues[index];
+
 
     content.innerHTML = `
 
@@ -515,8 +466,22 @@ function updatePage() {
             ${clue.hint}
         </div>
 
-        <div class="answer">
-            🔐 Answer: ${clue.answer}
+        <input
+            id="answer"
+            type="text"
+            placeholder="Type your answer..."
+            autocomplete="off"
+        >
+
+        <br>
+
+        <button onclick="checkAnswer()">
+            🔓 UNLOCK
+        </button>
+
+        <div
+            id="message"
+            class="message">
         </div>
 
     `;
@@ -524,14 +489,83 @@ function updatePage() {
 }
 
 
+/* =========================
+   CHECK ANSWER
+   ========================= */
+
+function checkAnswer() {
+
+    const index =
+        getCurrentClue();
+
+    const clue =
+        clues[index];
+
+    const input =
+        document.getElementById("answer");
+
+    const message =
+        document.getElementById("message");
+
+    const userAnswer =
+        normalise(input.value);
+
+    const correct =
+        clue.answers.some(answer =>
+            normalise(answer) === userAnswer
+        );
+
+
+    if (correct) {
+
+        message.className =
+            "message success";
+
+        message.innerHTML =
+            "🎉 Correct! You remembered! ❤️<br><br>" +
+            "Come back tomorrow for the next piece of our story. 🥹";
+
+        input.disabled = true;
+
+    } else {
+
+        message.className =
+            "message wrong";
+
+        message.innerHTML =
+            "Hmm… 😏 That's not it. Try again ❤️";
+
+    }
+
+}
+
+
+/* =========================
+   ENTER KEY
+   ========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+        const input =
+            document.getElementById("answer");
+
+        if (input) {
+            checkAnswer();
+        }
+
+    }
+
+});
+
+
 updatePage();
 
-setInterval(updatePage, 1000);
 
-
-/*
-Floating hearts
-*/
+/* =========================
+   FLOATING HEARTS
+   ========================= */
 
 function createHeart() {
 
