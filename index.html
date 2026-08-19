@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Our First Anniversary ❤️</title>
+<title>Our Little Treasure Hunt ❤️</title>
 
 <style>
 * {
@@ -14,15 +14,16 @@
 body {
     margin: 0;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-family: Georgia, serif;
     color: white;
+
     background:
-        radial-gradient(circle at top, #5b203b, transparent 45%),
+        radial-gradient(circle at top, #64243f, transparent 45%),
         linear-gradient(135deg, #10070d, #32101f, #10070d);
 }
 
@@ -31,71 +32,99 @@ body {
     max-width: 650px;
     position: relative;
     z-index: 2;
+    padding: 30px 0;
 }
 
 .heart {
-    font-size: 50px;
+    font-size: 48px;
     animation: heartbeat 1.5s infinite;
 }
 
 h1 {
-    font-size: clamp(32px, 8vw, 52px);
+    font-size: clamp(30px, 8vw, 50px);
     margin: 15px 0;
-    text-shadow: 0 0 20px rgba(255,170,200,.4);
 }
 
 .subtitle {
-    font-size: 19px;
-    line-height: 1.7;
     color: #f9dce8;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
-.date {
-    margin: 25px 0;
+.card {
+    margin-top: 30px;
+    padding: 30px 22px;
+    border-radius: 25px;
+
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,200,220,.18);
+
+    box-shadow:
+        0 0 30px rgba(255,120,170,.12),
+        inset 0 0 30px rgba(255,255,255,.03);
+
+    backdrop-filter: blur(8px);
+}
+
+.clue-number {
+    color: #ffb5cf;
+    letter-spacing: 4px;
     font-size: 13px;
-    letter-spacing: 5px;
-    color: #eeb3c9;
+    margin-bottom: 18px;
 }
 
-#countdown {
-    margin: 30px 0;
-    font-size: clamp(20px, 5vw, 30px);
-    font-weight: bold;
-    color: #ffd8e5;
-    text-shadow: 0 0 15px rgba(255,180,210,.5);
+.clue {
+    font-size: 20px;
+    line-height: 1.8;
 }
 
-.small {
-    color: #dcb8c7;
+.hint {
+    margin-top: 22px;
+    color: #e8b9cb;
+    font-size: 15px;
+}
+
+.answer {
+    margin-top: 25px;
+    padding: 14px;
+    border-radius: 15px;
+    background: rgba(255,180,210,.12);
+    color: #ffdce9;
     font-size: 14px;
-    line-height: 1.6;
 }
 
-#surprise {
-    display: none;
+.countdown {
+    margin-top: 25px;
+    color: #ffd5e3;
+    font-size: 17px;
 }
 
-.message {
-    font-size: 23px;
-    line-height: 1.6;
-    margin: 25px 0;
+.locked {
+    color: #e5b8ca;
+    line-height: 1.8;
 }
 
 .button {
     display: inline-block;
-    padding: 17px 32px;
+    margin-top: 25px;
+    padding: 17px 30px;
+
     background: linear-gradient(135deg, #ffb4cf, #f58fb3);
     color: #351020;
+
     text-decoration: none;
     border-radius: 50px;
+
     font-weight: bold;
     font-size: 17px;
+
     box-shadow: 0 0 30px rgba(255,150,190,.45);
-    animation: glow 2s infinite;
 }
 
-.button:active {
-    transform: scale(.95);
+.small {
+    margin-top: 25px;
+    color: #dcb8c7;
+    font-size: 14px;
 }
 
 /* Floating hearts */
@@ -110,6 +139,7 @@ h1 {
 }
 
 @keyframes floatUp {
+
     from {
         transform: translateY(0) rotate(0deg);
         opacity: 0;
@@ -126,22 +156,13 @@ h1 {
 }
 
 @keyframes heartbeat {
+
     0%,100% {
         transform: scale(1);
     }
 
     50% {
         transform: scale(1.2);
-    }
-}
-
-@keyframes glow {
-    0%,100% {
-        box-shadow: 0 0 20px rgba(255,150,190,.35);
-    }
-
-    50% {
-        box-shadow: 0 0 40px rgba(255,150,190,.7);
     }
 }
 </style>
@@ -153,102 +174,372 @@ h1 {
 
     <div class="heart">❤️</div>
 
-    <h1>For You, My Love</h1>
+    <h1>Our Little Treasure Hunt</h1>
 
     <div class="subtitle">
-        One year. One beautiful story.<br>
-        Countless memories.
+        8 days. 8 little pieces of us.<br>
+        Let's see if you remember them all. 🥹
     </div>
 
-    <div class="date">
-        OUR FIRST ANNIVERSARY
-    </div>
-
-    <div id="countdown">
-        Loading our countdown... ❤️
-    </div>
-
-    <div id="waiting" class="small">
-        Something special is waiting for you... 🥹<br>
-        Come back when the countdown reaches zero.
-    </div>
-
-    <div id="surprise">
-
-        <div class="message">
-            🎉 Happy 1st Anniversary, My Love! ❤️
-            <br>
-            Your surprise is ready... 🥹
-        </div>
-
-        <a
-            class="button"
-            href="canvas_our-story-260818_1459.pdf"
-            target="_blank">
-            💌 OPEN YOUR SURPRISE
-        </a>
-
-        <div class="small" style="margin-top:25px;">
-            And this is only the beginning... ♾️
-        </div>
-
-    </div>
+    <div class="card" id="content"></div>
 
 </div>
 
+
 <script>
 
-const targetDate =
-    new Date("2026-08-28T00:00:00+05:30").getTime();
+/*
+==================================================
+ANNIVERSARY TREASURE HUNT
+IST = UTC + 5:30
+==================================================
+*/
 
-function updateCountdown() {
+const clues = [
 
-    const now = new Date().getTime();
-    const difference = targetDate - now;
+    {
+        date: "2026-08-20",
+        number: "CLUE 1",
+        title: "🐺 THE ONE WHO MADE ME CRY",
+        text: `
+        “Out of all the deaths in Game of Thrones,
+        which completely insignificant little character's
+        death had me sitting there like 😭?”
+        `,
+        hint: "Hint: Jon Snow knows nothing… but you should know this. 😂❤️",
+        answer: "OLLY"
+    },
 
-    if (difference <= 0) {
+    {
+        date: "2026-08-21",
+        number: "CLUE 2",
+        title: "🌴 THE PLACE",
+        text: `
+        “If our love story had a vacation chapter,
+        where would you find it? 🌴❤️”
+        `,
+        hint: "Hint: It was our honeymoon destination.",
+        answer: "POLLACHI"
+    },
 
-        document.getElementById("countdown").style.display = "none";
+    {
+        date: "2026-08-22",
+        number: "CLUE 3",
+        title: "💕 THE NAMES",
+        text: `
+        “Everyone knows my real name…
+        but you decided I needed two more. 😂
 
-        document.getElementById("waiting").style.display = "none";
+        What are the two names you gave me?”
+        `,
+        hint: "Hint: You know them better than anyone.",
+        answer: "POPS + MONICAN"
+    },
 
-        document.getElementById("surprise").style.display = "block";
+    {
+        date: "2026-08-23",
+        number: "CLUE 4",
+        title: "📍 WHERE IT ALL STARTED",
+        text: `
+        “Before the honeymoon, before the nicknames,
+        before all these memories…
+
+        there was a place where our story quietly began. ❤️
+
+        You were the one who sent me the link to that place.
+
+        Where was it?”
+        `,
+        hint: "Enter the place name.",
+        answer: "KALLAKURICHI"
+    },
+
+    {
+        date: "2026-08-24",
+        number: "CLUE 5",
+        title: "♾️ THE FIRST GIFT",
+        text: `
+        “Remember the first gift I gave you? 👀
+
+        The one that mysteriously disappeared from your life… 😂
+
+        What was it?”
+        `,
+        hint: "Hint: To infinity… and beyond. ♾️",
+        answer: "THE KEYCHAIN"
+    },
+
+    {
+        date: "2026-08-25",
+        number: "CLUE 6",
+        title: "🤍 THE WHITE SHIRT",
+        text: `
+        “There’s one particular look of yours
+        that I’ve told you about more than once… 👀
+
+        The one I keep replaying in my head.
+
+        What am I talking about?”
+        `,
+        hint: "Hint: Think white shirt. 🤍",
+        answer: "YOUR CHEST HAIR SHOWING THROUGH YOUR WHITE SHIRT"
+    },
+
+    {
+        date: "2026-08-26",
+        number: "CLUE 7",
+        title: "💵 THE DENOMINATION",
+        text: `
+        “You taught me so many things at work…
+
+        Which cash denomination do I use the least?”
+        `,
+        hint: "Think about all those days we've spent handling cash together. 😏",
+        answer: "₹200"
+    },
+
+    {
+        date: "2026-08-27",
+        number: "CLUE 8",
+        title: "🏡 THE FUTURE",
+        text: `
+        “If our little family grows one day,
+        what would I wish for?
+
+        Not just a son…
+
+        but a son like you. 🥹❤️”
+        `,
+        hint: "One final answer.",
+        answer: "A SON LIKE YOU"
+    }
+
+];
+
+
+/*
+Get current IST date
+*/
+
+function getISTDate() {
+
+    const now = new Date();
+
+    return new Date(
+        now.toLocaleString("en-US", {
+            timeZone: "Asia/Kolkata"
+        })
+    );
+}
+
+
+/*
+Format countdown
+*/
+
+function formatTime(milliseconds) {
+
+    if (milliseconds <= 0) {
+        return "00d 00h 00m 00s";
+    }
+
+    const totalSeconds =
+        Math.floor(milliseconds / 1000);
+
+    const days =
+        Math.floor(totalSeconds / 86400);
+
+    const hours =
+        Math.floor((totalSeconds % 86400) / 3600);
+
+    const minutes =
+        Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+        totalSeconds % 60;
+
+    return `${days}d ${String(hours).padStart(2,"0")}h ${String(minutes).padStart(2,"0")}m ${String(seconds).padStart(2,"0")}s`;
+}
+
+
+/*
+Find today's clue
+*/
+
+function getCurrentClue() {
+
+    const ist = getISTDate();
+
+    const today =
+        ist.toISOString().split("T")[0];
+
+    for (let i = clues.length - 1; i >= 0; i--) {
+
+        if (today >= clues[i].date) {
+            return i;
+        }
+
+    }
+
+    return -1;
+}
+
+
+/*
+Show page
+*/
+
+function updatePage() {
+
+    const content =
+        document.getElementById("content");
+
+    const ist =
+        getISTDate();
+
+    const today =
+        ist.toISOString().split("T")[0];
+
+    /*
+    BEFORE AUG 20
+    */
+
+    if (today < "2026-08-20") {
+
+        const firstClue =
+            new Date("2026-08-20T00:00:00+05:30");
+
+        const now =
+            new Date();
+
+        const difference =
+            firstClue.getTime() - now.getTime();
+
+        content.innerHTML = `
+
+            <div class="clue-number">
+                SOMETHING IS COMING ❤️
+            </div>
+
+            <div class="clue">
+                Your first clue isn't ready yet…
+                🥹
+            </div>
+
+            <div class="countdown">
+                ${formatTime(difference)}
+            </div>
+
+            <div class="small">
+                Come back on August 20.
+            </div>
+
+        `;
 
         return;
     }
 
-    const days = Math.floor(
-        difference / (1000 * 60 * 60 * 24)
-    );
 
-    const hours = Math.floor(
-        (difference / (1000 * 60 * 60)) % 24
-    );
+    /*
+    AUGUST 28 = FINAL SURPRISE
+    */
 
-    const minutes = Math.floor(
-        (difference / (1000 * 60)) % 60
-    );
+    if (today >= "2026-08-28") {
 
-    const seconds = Math.floor(
-        (difference / 1000) % 60
-    );
+        content.innerHTML = `
 
-    document.getElementById("countdown").innerHTML =
-        `${days} Days · ${hours} Hours · ${minutes} Minutes · ${seconds} Seconds`;
+            <div class="clue-number">
+                🎉 YOU FOUND THE TREASURE 🎉
+            </div>
+
+            <div class="clue">
+
+                You solved every clue…<br><br>
+
+                but the real treasure was you all along. ❤️
+
+                <br><br>
+
+                <strong>
+                Happy 1st Anniversary, Sheshi.
+                </strong>
+
+                <br><br>
+
+                Here's to our little family,
+                our little world,
+                and everything still waiting for us. ♾️
+
+            </div>
+
+            <a
+                class="button"
+                href="canvas_our-story-260818_1459.pdf"
+                target="_blank">
+
+                💌 OPEN YOUR SURPRISE
+
+            </a>
+
+        `;
+
+        return;
+    }
+
+
+    /*
+    SHOW CURRENT CLUE
+    */
+
+    const index =
+        getCurrentClue();
+
+    const clue =
+        clues[index];
+
+    content.innerHTML = `
+
+        <div class="clue-number">
+            ${clue.number}
+        </div>
+
+        <h2>
+            ${clue.title}
+        </h2>
+
+        <div class="clue">
+            ${clue.text}
+        </div>
+
+        <div class="hint">
+            ${clue.hint}
+        </div>
+
+        <div class="answer">
+            🔐 Answer: ${clue.answer}
+        </div>
+
+    `;
+
 }
 
-updateCountdown();
 
-setInterval(updateCountdown, 1000);
+updatePage();
+
+setInterval(updatePage, 1000);
 
 
-/* Create floating hearts */
+/*
+Floating hearts
+*/
 
 function createHeart() {
 
-    const heart = document.createElement("div");
+    const heart =
+        document.createElement("div");
 
-    heart.className = "floating-heart";
+    heart.className =
+        "floating-heart";
 
     heart.innerHTML =
         Math.random() > 0.5 ? "❤️" : "♡";
@@ -267,6 +558,7 @@ function createHeart() {
     setTimeout(() => {
         heart.remove();
     }, 10000);
+
 }
 
 setInterval(createHeart, 700);
