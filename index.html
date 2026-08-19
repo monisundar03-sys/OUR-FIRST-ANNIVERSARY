@@ -1,104 +1,149 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Our First Anniversary ❤️</title>
 
 <style>
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Georgia, serif;
+    color: white;
+    background:
+        radial-gradient(circle at top, #5b203b, transparent 45%),
+        linear-gradient(135deg, #10070d, #32101f, #10070d);
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.heart {
+    font-size: 50px;
+    animation: heartbeat 1.5s infinite;
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 52px);
+    margin: 15px 0;
+    text-shadow: 0 0 20px rgba(255,170,200,.4);
+}
+
+.subtitle {
+    font-size: 19px;
+    line-height: 1.7;
+    color: #f9dce8;
+}
+
+.date {
+    margin: 25px 0;
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: #eeb3c9;
+}
+
+#countdown {
+    margin: 30px 0;
+    font-size: clamp(20px, 5vw, 30px);
+    font-weight: bold;
+    color: #ffd8e5;
+    text-shadow: 0 0 15px rgba(255,180,210,.5);
+}
+
+.small {
+    color: #dcb8c7;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#surprise {
+    display: none;
+}
+
+.message {
+    font-size: 23px;
+    line-height: 1.6;
+    margin: 25px 0;
+}
+
+.button {
+    display: inline-block;
+    padding: 17px 32px;
+    background: linear-gradient(135deg, #ffb4cf, #f58fb3);
+    color: #351020;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 0 0 30px rgba(255,150,190,.45);
+    animation: glow 2s infinite;
+}
+
+.button:active {
+    transform: scale(.95);
+}
+
+/* Floating hearts */
+
+.floating-heart {
+    position: fixed;
+    bottom: -40px;
+    color: rgba(255,180,210,.65);
+    font-size: 20px;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
     }
 
-    body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-family: Georgia, serif;
-        color: #fff;
-        background: linear-gradient(135deg, #170b12, #3b1425, #170b12);
-        padding: 25px;
+    10% {
+        opacity: 1;
     }
 
-    .container {
-        max-width: 650px;
-        width: 100%;
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
     }
 
-    .heart {
-        font-size: 45px;
-        animation: pulse 1.5s infinite;
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes glow {
+    0%,100% {
+        box-shadow: 0 0 20px rgba(255,150,190,.35);
     }
 
-    h1 {
-        font-size: 42px;
-        margin: 15px 0;
+    50% {
+        box-shadow: 0 0 40px rgba(255,150,190,.7);
     }
-
-    .subtitle {
-        font-size: 19px;
-        line-height: 1.6;
-        color: #f8dce7;
-    }
-
-    .date {
-        margin: 25px 0;
-        font-size: 15px;
-        letter-spacing: 4px;
-        color: #e9b6c9;
-    }
-
-    #countdown {
-        font-size: 25px;
-        margin: 30px 0;
-        font-weight: bold;
-        line-height: 1.6;
-    }
-
-    #surprise {
-        display: none;
-    }
-
-    .message {
-        font-size: 22px;
-        margin: 25px 0;
-    }
-
-    .button {
-        display: inline-block;
-        padding: 16px 30px;
-        background: #f2a7c2;
-        color: #32101e;
-        text-decoration: none;
-        border-radius: 40px;
-        font-weight: bold;
-        font-size: 17px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        transition: transform 0.2s;
-    }
-
-    .button:hover {
-        transform: scale(1.05);
-    }
-
-    .small {
-        margin-top: 30px;
-        font-size: 14px;
-        color: #d9b7c4;
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.15);
-        }
-    }
+}
 </style>
 </head>
 
@@ -124,33 +169,37 @@
     </div>
 
     <div id="waiting" class="small">
-        Something special is waiting for you...<br>
-        Come back when the countdown reaches zero. 🥹
+        Something special is waiting for you... 🥹<br>
+        Come back when the countdown reaches zero.
     </div>
 
     <div id="surprise">
+
         <div class="message">
-            Happy 1st Anniversary, My Love! ❤️
-            <br><br>
+            🎉 Happy 1st Anniversary, My Love! ❤️
+            <br>
             Your surprise is ready... 🥹
         </div>
 
-        <a class="button"
-           href="canvas_our-story-260818_1459.pdf"
-           target="_blank">
+        <a
+            class="button"
+            href="canvas_our-story-260818_1459.pdf"
+            target="_blank">
             💌 OPEN YOUR SURPRISE
         </a>
 
-        <div class="small">
+        <div class="small" style="margin-top:25px;">
             And this is only the beginning... ♾️
         </div>
+
     </div>
 
 </div>
 
 <script>
 
-const targetDate = new Date("2026-08-28T00:00:00+05:30").getTime();
+const targetDate =
+    new Date("2026-08-28T00:00:00+05:30").getTime();
 
 function updateCountdown() {
 
@@ -160,7 +209,9 @@ function updateCountdown() {
     if (difference <= 0) {
 
         document.getElementById("countdown").style.display = "none";
+
         document.getElementById("waiting").style.display = "none";
+
         document.getElementById("surprise").style.display = "block";
 
         return;
@@ -189,6 +240,36 @@ function updateCountdown() {
 updateCountdown();
 
 setInterval(updateCountdown, 1000);
+
+
+/* Create floating hearts */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    heart.innerHTML =
+        Math.random() > 0.5 ? "❤️" : "♡";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 20) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+}
+
+setInterval(createHeart, 700);
 
 </script>
 
