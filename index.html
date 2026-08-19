@@ -14,10 +14,11 @@
 body {
     margin: 0;
     min-height: 100vh;
+    overflow-x: hidden;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
     text-align: center;
 
     font-family: Georgia, serif;
@@ -141,11 +142,10 @@ button,
     font-size: 14px;
 }
 
-.test {
-    margin-top: 18px;
-    color: #ff9fc3;
-    font-size: 12px;
-    letter-spacing: 3px;
+.locked {
+    color: #e9b7c9;
+    font-size: 17px;
+    line-height: 1.7;
 }
 
 .floating-heart {
@@ -208,19 +208,14 @@ button,
 <script>
 
 /* =====================================================
-   TEST MODE
-   ===================================================== */
-
-const TEST_MODE = true;
-
-
-/* =====================================================
    CLUES
    ===================================================== */
 
 const clues = [
 
 {
+    date: "2026-08-20",
+
     number: "CLUE 1",
 
     title: "🐺 THE ONE WHO MADE ME CRY",
@@ -242,6 +237,8 @@ const clues = [
 
 
 {
+    date: "2026-08-21",
+
     number: "CLUE 2",
 
     title: "🌴 THE PLACE",
@@ -262,6 +259,8 @@ const clues = [
 
 
 {
+    date: "2026-08-22",
+
     number: "CLUE 3",
 
     title: "💕 THE NAMES",
@@ -286,6 +285,8 @@ const clues = [
 
 
 {
+    date: "2026-08-23",
+
     number: "CLUE 4",
 
     title: "📍 WHERE IT ALL STARTED",
@@ -314,6 +315,8 @@ const clues = [
 
 
 {
+    date: "2026-08-24",
+
     number: "CLUE 5",
 
     title: "♾️ THE FIRST GIFT",
@@ -337,6 +340,8 @@ const clues = [
 
 
 {
+    date: "2026-08-25",
+
     number: "CLUE 6",
 
     title: "🤍 THE WHITE SHIRT",
@@ -364,6 +369,8 @@ const clues = [
 
 
 {
+    date: "2026-08-26",
+
     number: "CLUE 7",
 
     title: "💵 THE DENOMINATION",
@@ -388,6 +395,8 @@ const clues = [
 
 
 {
+    date: "2026-08-27",
+
     number: "CLUE 8",
 
     title: "🏡 THE FUTURE",
@@ -416,14 +425,16 @@ const clues = [
 
 
 /* =====================================================
-   TEST PROGRESS
+   SAVED PROGRESS
    ===================================================== */
 
-let currentClue = 0;
+let solved = JSON.parse(
+    localStorage.getItem("anniversarySolved") || "[]"
+);
 
 
 /* =====================================================
-   NORMALISE ANSWER
+   NORMALISE ANSWERS
    ===================================================== */
 
 function normalise(value) {
@@ -438,16 +449,228 @@ function normalise(value) {
 
 
 /* =====================================================
-   SHOW CURRENT CLUE
+   GET INDIA DATE
    ===================================================== */
 
-function showClue() {
+function getIndiaDate() {
+
+    const now = new Date();
+
+    const indiaString =
+        now.toLocaleString(
+            "en-US",
+            {
+                timeZone: "Asia/Kolkata"
+            }
+        );
+
+    return new Date(indiaString);
+}
+
+
+/* =====================================================
+   FIND TODAY'S CLUE
+   ===================================================== */
+
+function getTodayIndex() {
+
+    const indiaDate =
+        getIndiaDate();
+
+    const year =
+        indiaDate.getFullYear();
+
+    const month =
+        String(
+            indiaDate.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            indiaDate.getDate()
+        ).padStart(2, "0");
+
+    const today =
+        `${year}-${month}-${day}`;
+
+
+    return clues.findIndex(
+        clue => clue.date === today
+    );
+
+}
+
+
+/* =====================================================
+   SHOW PAGE
+   ===================================================== */
+
+function showPage() {
+
+    const content =
+        document.getElementById("content");
+
+    const indiaDate =
+        getIndiaDate();
+
+    const year =
+        indiaDate.getFullYear();
+
+    const month =
+        String(
+            indiaDate.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            indiaDate.getDate()
+        ).padStart(2, "0");
+
+    const today =
+        `${year}-${month}-${day}`;
+
+
+    /* -----------------------------------------------
+       BEFORE AUGUST 20
+       ----------------------------------------------- */
+
+    if (today < "2026-08-20") {
+
+        content.innerHTML = `
+
+            <div class="clue-number">
+                SOMETHING IS COMING ❤️
+            </div>
+
+            <div class="locked">
+                Your first clue isn't ready yet… 🥹
+                <br><br>
+                Come back on August 20.
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       AUGUST 28 OR LATER
+       ----------------------------------------------- */
+
+    if (today >= "2026-08-28") {
+
+        if (solved.length === 8) {
+
+            showFinal();
+
+        } else {
+
+            content.innerHTML = `
+
+                <div class="clue-number">
+                    ❤️ ALMOST THERE
+                </div>
+
+                <div class="locked">
+
+                    The treasure is waiting… 🥹
+
+                    <br><br>
+
+                    Complete all eight clues
+                    to unlock it.
+
+                    <div class="progress">
+                        ${solved.length} / 8 clues solved
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       FIND TODAY'S CLUE
+       ----------------------------------------------- */
+
+    const index =
+        getTodayIndex();
+
+
+    if (index === -1) {
+
+        content.innerHTML = `
+
+            <div class="locked">
+                Come back tomorrow for
+                the next piece of our story. ❤️
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       ALREADY SOLVED TODAY
+       ----------------------------------------------- */
+
+    if (solved.includes(index)) {
+
+        content.innerHTML = `
+
+            <div class="clue-number">
+                ❤️ CLUE UNLOCKED
+            </div>
+
+            <div class="clue">
+
+                You got today's memory! 🥹
+
+                <br><br>
+
+                Come back tomorrow
+                for the next one.
+
+            </div>
+
+            <div class="progress">
+                ${solved.length} / 8 clues solved ❤️
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       SHOW TODAY'S CLUE
+       ----------------------------------------------- */
+
+    showClue(index);
+
+}
+
+
+/* =====================================================
+   SHOW CLUE
+   ===================================================== */
+
+function showClue(index) {
 
     const content =
         document.getElementById("content");
 
     const clue =
-        clues[currentClue];
+        clues[index];
 
 
     content.innerHTML = `
@@ -477,7 +700,7 @@ function showClue() {
 
         <br>
 
-        <button onclick="checkAnswer()">
+        <button onclick="checkAnswer(${index})">
             🔓 UNLOCK
         </button>
 
@@ -487,11 +710,7 @@ function showClue() {
         </div>
 
         <div class="progress">
-            ${currentClue} / 8 clues solved ❤️
-        </div>
-
-        <div class="test">
-            TEST MODE
+            ${solved.length} / 8 clues solved ❤️
         </div>
 
     `;
@@ -503,10 +722,10 @@ function showClue() {
    CHECK ANSWER
    ===================================================== */
 
-function checkAnswer() {
+function checkAnswer(index) {
 
     const clue =
-        clues[currentClue];
+        clues[index];
 
     const input =
         document.getElementById("answer");
@@ -527,6 +746,22 @@ function checkAnswer() {
 
     if (correct) {
 
+        if (!solved.includes(index)) {
+
+            solved.push(index);
+
+            solved.sort(
+                (a, b) => a - b
+            );
+
+            localStorage.setItem(
+                "anniversarySolved",
+                JSON.stringify(solved)
+            );
+
+        }
+
+
         message.className =
             "message success";
 
@@ -537,21 +772,10 @@ function checkAnswer() {
         input.disabled = true;
 
 
-        setTimeout(() => {
-
-            currentClue++;
-
-            if (currentClue >= clues.length) {
-
-                showFinal();
-
-            } else {
-
-                showClue();
-
-            }
-
-        }, 1200);
+        setTimeout(
+            showPage,
+            1300
+        );
 
 
     } else {
@@ -618,11 +842,6 @@ function showFinal() {
             8 / 8 clues solved ❤️
         </div>
 
-
-        <div class="test">
-            TEST COMPLETE
-        </div>
-
     `;
 
 }
@@ -642,7 +861,14 @@ document.addEventListener(
                 document.getElementById("answer");
 
             if (input) {
-                checkAnswer();
+
+                const index =
+                    getTodayIndex();
+
+                if (index >= 0) {
+                    checkAnswer(index);
+                }
+
             }
 
         }
@@ -655,7 +881,7 @@ document.addEventListener(
    START
    ===================================================== */
 
-showClue();
+showPage();
 
 
 /* =====================================================
