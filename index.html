@@ -14,11 +14,12 @@
 body {
     margin: 0;
     min-height: 100vh;
-    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
     text-align: center;
+
     font-family: Georgia, serif;
     color: white;
 
@@ -49,9 +50,12 @@ h1 {
     margin-top: 30px;
     padding: 30px 22px;
     border-radius: 25px;
+
     background: rgba(255,255,255,.08);
     border: 1px solid rgba(255,200,220,.18);
+
     box-shadow: 0 0 30px rgba(255,120,170,.12);
+
     backdrop-filter: blur(8px);
 }
 
@@ -80,26 +84,40 @@ h2 {
 input {
     width: 90%;
     max-width: 450px;
+
     margin-top: 25px;
     padding: 15px;
+
     border: none;
     border-radius: 30px;
+
     text-align: center;
     font-size: 16px;
+
     outline: none;
 }
 
 button,
 .button {
     display: inline-block;
+
     margin-top: 18px;
     padding: 15px 28px;
+
     border: none;
     border-radius: 50px;
-    background: linear-gradient(135deg, #ffb4cf, #f58fb3);
+
+    background: linear-gradient(
+        135deg,
+        #ffb4cf,
+        #f58fb3
+    );
+
     color: #351020;
+
     font-weight: bold;
     font-size: 16px;
+
     cursor: pointer;
     text-decoration: none;
 }
@@ -124,22 +142,27 @@ button,
 }
 
 .test {
-    margin-top: 15px;
-    color: #ffb4cf;
+    margin-top: 18px;
+    color: #ff9fc3;
     font-size: 12px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .floating-heart {
     position: fixed;
     bottom: -40px;
+
     color: rgba(255,180,210,.65);
+
     font-size: 20px;
+
     animation: floatUp linear forwards;
+
     pointer-events: none;
 }
 
 @keyframes floatUp {
+
     from {
         transform: translateY(0) rotate(0deg);
         opacity: 0;
@@ -156,7 +179,8 @@ button,
 }
 
 @keyframes heartbeat {
-    0%,100% {
+
+    0%, 100% {
         transform: scale(1);
     }
 
@@ -167,190 +191,239 @@ button,
 </style>
 </head>
 
+
 <body>
 
 <div class="container">
 
-<div class="heart">❤️</div>
+    <div class="heart">❤️</div>
 
-<h1>Our Little Treasure Hunt</h1>
+    <h1>Our Little Treasure Hunt</h1>
 
-<div class="card" id="content"></div>
+    <div class="card" id="content"></div>
 
 </div>
+
 
 <script>
 
 /* =====================================================
-   CHANGE THIS TO FALSE BEFORE SENDING THE LINK
+   TEST MODE
    ===================================================== */
 
 const TEST_MODE = true;
 
 
 /* =====================================================
-   YOUR 8 CLUES
+   CLUES
    ===================================================== */
 
 const clues = [
 
 {
-number: "CLUE 1",
-title: "🐺 THE ONE WHO MADE ME CRY",
+    number: "CLUE 1",
 
-text: `
-Out of all the deaths in Game of Thrones,
-which completely insignificant little character's
-death had me sitting there like 😭?
-`,
+    title: "🐺 THE ONE WHO MADE ME CRY",
 
-hint: "Hint: Jon Snow knows nothing… but you should know this. 😂❤️",
+    text: `
+    Out of all the deaths in Game of Thrones,
+    which completely insignificant little character's
+    death had me sitting there like 😭?
+    `,
 
-answers: ["olly"]
+    hint: `
+    Hint: Jon Snow knows nothing… but you should know this. 😂❤️
+    `,
+
+    answers: [
+        "olly"
+    ]
 },
 
+
 {
-number: "CLUE 2",
-title: "🌴 THE PLACE",
+    number: "CLUE 2",
 
-text: `
-If our love story had a vacation chapter,
-where would you find it? 🌴❤️
-`,
+    title: "🌴 THE PLACE",
 
-hint: "Hint: It was our honeymoon destination.",
+    text: `
+    If our love story had a vacation chapter,
+    where would you find it? 🌴❤️
+    `,
 
-answers: ["pollachi"]
+    hint: `
+    Hint: It was our honeymoon destination.
+    `,
+
+    answers: [
+        "pollachi"
+    ]
 },
 
+
 {
-number: "CLUE 3",
-title: "💕 THE NAMES",
+    number: "CLUE 3",
 
-text: `
-Everyone knows my real name…
-but you decided I needed two more. 😂
+    title: "💕 THE NAMES",
 
-What are the two names you gave me?
-`,
+    text: `
+    Everyone knows my real name…
+    but you decided I needed two more. 😂
 
-hint: "Hint: You know them better than anyone.",
+    What are the two names you gave me?
+    `,
 
-answers: [
-"pops and monican",
-"pops + monican",
-"pops monican"
-]
+    hint: `
+    Hint: You know them better than anyone.
+    `,
+
+    answers: [
+        "pops and monican",
+        "pops + monican",
+        "pops monican"
+    ]
 },
 
+
 {
-number: "CLUE 4",
-title: "📍 WHERE IT ALL STARTED",
+    number: "CLUE 4",
 
-text: `
-Before the honeymoon, before the nicknames,
-before all these memories…
+    title: "📍 WHERE IT ALL STARTED",
 
-there was a place where our story quietly began. ❤️
+    text: `
+    Before the honeymoon, before the nicknames,
+    before all these memories…
 
-You were the one who sent me the link to that place.
+    there was a place where our story quietly began. ❤️
 
-Where was it?
-`,
+    You were the one who sent me the link to that place.
 
-hint: "Enter the place name.",
+    Where was it?
+    `,
 
-answers: ["kallakurichi"]
+    hint: `
+    Hint: Think about where our story started.
+    `,
+
+    answers: [
+        "indian bank kallakurichi",
+        "indian bank, kallakurichi",
+        "indian bank kallakurichi branch"
+    ]
 },
 
+
 {
-number: "CLUE 5",
-title: "♾️ THE FIRST GIFT",
+    number: "CLUE 5",
 
-text: `
-Remember the first gift I gave you? 👀
+    title: "♾️ THE FIRST GIFT",
 
-The one that mysteriously disappeared from your life… 😂
+    text: `
+    Remember the first gift I gave you? 👀
 
-What was it?
-`,
+    The one that mysteriously disappeared from your life… 😂
 
-hint: "Hint: To infinity… and beyond. ♾️",
+    What did it say?
+    `,
 
-answers: [
-"to infinity and beyond"
-]
+    hint: `
+    Hint: A little reminder that has no end. ♾️
+    `,
+
+    answers: [
+        "to infinity and beyond"
+    ]
 },
 
+
 {
-number: "CLUE 6",
-title: "🤍 THE WHITE SHIRT",
+    number: "CLUE 6",
 
-text: `
-There’s one particular look of yours
-that I’ve told you about more than once… 👀
+    title: "🤍 THE WHITE SHIRT",
 
-The one I keep replaying in my head.
+    text: `
+    There’s one particular look of yours
+    that I’ve told you about more than once… 👀
 
-What am I talking about?
-`,
+    The one I keep replaying in my head.
 
-hint: "Hint: Think white shirt. 🤍",
+    What am I talking about?
+    `,
 
-answers: [
-"chest hair white shirt",
-"chest hair whiteshirt",
-"chest hair in white shirt",
-"your chest hair showing through your white shirt"
-]
+    hint: `
+    Hint: Think of that one look you keep talking about. 🤍
+    `,
+
+    answers: [
+        "chest hair white shirt",
+        "chest hair whiteshirt",
+        "chest hair in white shirt",
+        "your chest hair showing through your white shirt"
+    ]
 },
 
+
 {
-number: "CLUE 7",
-title: "💵 THE DENOMINATION",
+    number: "CLUE 7",
 
-text: `
-You taught me so many things at work…
+    title: "💵 THE DENOMINATION",
 
-Which cash denomination do I use the least?
-`,
+    text: `
+    You taught me so many things at work…
 
-hint: "Think about all those days we've spent handling cash together. 😏",
+    Which cash denomination do I use the least?
+    `,
 
-answers: [
-"200",
-"₹200",
-"rs 200",
-"rs. 200"
-]
+    hint: `
+    Hint: Think about all those days we've spent handling cash together. 😏
+    `,
+
+    answers: [
+        "200",
+        "₹200",
+        "rs 200",
+        "rs. 200"
+    ]
 },
 
+
 {
-number: "CLUE 8",
-title: "🏡 THE FUTURE",
+    number: "CLUE 8",
 
-text: `
-If our little family grows one day,
-what would I wish for?
+    title: "🏡 THE FUTURE",
 
-Not just a son…
+    text: `
+    After everything we've built together… ❤️
 
-but a son like you. 🥹❤️
-`,
+    If our little family grows one day,
+    there's one little dream I carry in my heart.
 
-hint: "One final answer.",
+    What do you think I'd wish for? 🥹
+    `,
 
-answers: [
-"a son like you",
-"son like you"
-]
+    hint: `
+    Hint: Think of someone very special to me…
+    and a tiny version of him. ❤️
+    `,
+
+    answers: [
+        "a son like you",
+        "son like you"
+    ]
 }
 
 ];
 
 
 /* =====================================================
-   NORMALISE ANSWERS
+   TEST PROGRESS
+   ===================================================== */
+
+let currentClue = 0;
+
+
+/* =====================================================
+   NORMALISE ANSWER
    ===================================================== */
 
 function normalise(value) {
@@ -365,226 +438,61 @@ function normalise(value) {
 
 
 /* =====================================================
-   SAVED PROGRESS
+   SHOW CURRENT CLUE
    ===================================================== */
 
-let solved =
-    JSON.parse(
-        localStorage.getItem("anniversarySolved") || "[]"
-    );
-
-
-/* =====================================================
-   SHOW PAGE
-   ===================================================== */
-
-function showPage() {
+function showClue() {
 
     const content =
         document.getElementById("content");
 
-    let currentIndex;
-
-
-    /* -----------------------------
-       TEST MODE
-       ----------------------------- */
-
-    if (TEST_MODE) {
-
-        currentIndex =
-            solved.length;
-
-        if (currentIndex >= clues.length) {
-
-            showFinal();
-
-            return;
-        }
-
-    }
-
-
-    /* -----------------------------
-       REAL MODE
-       ----------------------------- */
-
-    else {
-
-        const ist =
-            new Date(
-                new Date().toLocaleString(
-                    "en-US",
-                    {
-                        timeZone: "Asia/Kolkata"
-                    }
-                )
-            );
-
-        const today =
-            ist.toISOString().split("T")[0];
-
-        const dates = [
-            "2026-08-20",
-            "2026-08-21",
-            "2026-08-22",
-            "2026-08-23",
-            "2026-08-24",
-            "2026-08-25",
-            "2026-08-26",
-            "2026-08-27"
-        ];
-
-        currentIndex =
-            dates.indexOf(today);
-
-
-        /* Before Aug 20 */
-
-        if (currentIndex === -1 &&
-            today < "2026-08-20") {
-
-            content.innerHTML = `
-
-            <div class="clue-number">
-                SOMETHING IS COMING ❤️
-            </div>
-
-            <div class="clue">
-                Your first clue isn't ready yet… 🥹
-            </div>
-
-            <div class="progress">
-                Come back on August 20.
-            </div>
-
-            `;
-
-            return;
-        }
-
-
-        /* Aug 28 or later */
-
-        if (today >= "2026-08-28") {
-
-            if (solved.length === 8) {
-
-                showFinal();
-
-            } else {
-
-                content.innerHTML = `
-
-                <div class="clue-number">
-                    ❤️ ALMOST THERE
-                </div>
-
-                <div class="clue">
-                    You still have some memories
-                    waiting to be unlocked. 🥹
-                </div>
-
-                `;
-
-            }
-
-            return;
-        }
-
-
-        /* Current day */
-
-        if (currentIndex < 0) {
-
-            content.innerHTML = `
-            <div class="clue">
-            Come back tomorrow for the next clue ❤️
-            </div>
-            `;
-
-            return;
-        }
-
-        /* Don't show today's clue if already solved */
-
-        if (solved.includes(currentIndex)) {
-
-            content.innerHTML = `
-
-            <div class="clue-number">
-                ❤️ CLUE UNLOCKED
-            </div>
-
-            <div class="clue">
-                You got today's memory! 🥹
-            </div>
-
-            <div class="progress">
-                Come back tomorrow for the next one.
-            </div>
-
-            `;
-
-            return;
-        }
-
-    }
-
-
-    /* =================================================
-       DISPLAY CLUE
-       ================================================= */
-
     const clue =
-        clues[currentIndex];
+        clues[currentClue];
 
 
     content.innerHTML = `
 
-    <div class="clue-number">
-        ${clue.number}
-    </div>
-
-    <h2>
-        ${clue.title}
-    </h2>
-
-    <div class="clue">
-        ${clue.text}
-    </div>
-
-    <div class="hint">
-        ${clue.hint}
-    </div>
-
-    <input
-        id="answer"
-        type="text"
-        placeholder="Type your answer..."
-        autocomplete="off"
-    >
-
-    <br>
-
-    <button onclick="checkAnswer(${currentIndex})">
-        🔓 UNLOCK
-    </button>
-
-    <div
-        id="message"
-        class="message">
-    </div>
-
-    <div class="progress">
-        ${solved.length} / 8 clues solved ❤️
-    </div>
-
-    ${TEST_MODE ? `
-        <div class="test">
-        TEST MODE
+        <div class="clue-number">
+            ${clue.number}
         </div>
-    ` : ""}
+
+        <h2>
+            ${clue.title}
+        </h2>
+
+        <div class="clue">
+            ${clue.text}
+        </div>
+
+        <div class="hint">
+            ${clue.hint}
+        </div>
+
+        <input
+            id="answer"
+            type="text"
+            placeholder="Type your answer..."
+            autocomplete="off"
+        >
+
+        <br>
+
+        <button onclick="checkAnswer()">
+            🔓 UNLOCK
+        </button>
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+        <div class="progress">
+            ${currentClue} / 8 clues solved ❤️
+        </div>
+
+        <div class="test">
+            TEST MODE
+        </div>
 
     `;
 
@@ -595,10 +503,10 @@ function showPage() {
    CHECK ANSWER
    ===================================================== */
 
-function checkAnswer(index) {
+function checkAnswer() {
 
     const clue =
-        clues[index];
+        clues[currentClue];
 
     const input =
         document.getElementById("answer");
@@ -619,22 +527,6 @@ function checkAnswer(index) {
 
     if (correct) {
 
-        if (!solved.includes(index)) {
-
-            solved.push(index);
-
-            solved.sort(
-                (a,b) => a-b
-            );
-
-            localStorage.setItem(
-                "anniversarySolved",
-                JSON.stringify(solved)
-            );
-
-        }
-
-
         message.className =
             "message success";
 
@@ -642,19 +534,24 @@ function checkAnswer(index) {
             "🎉 Correct! ❤️";
 
 
+        input.disabled = true;
+
+
         setTimeout(() => {
 
-            if (solved.length === 8) {
+            currentClue++;
+
+            if (currentClue >= clues.length) {
 
                 showFinal();
 
             } else {
 
-                showPage();
+                showClue();
 
             }
 
-        }, 1300);
+        }, 1200);
 
 
     } else {
@@ -671,7 +568,7 @@ function checkAnswer(index) {
 
 
 /* =====================================================
-   FINAL PDF
+   FINAL TREASURE
    ===================================================== */
 
 function showFinal() {
@@ -679,50 +576,52 @@ function showFinal() {
     const content =
         document.getElementById("content");
 
+
     content.innerHTML = `
 
-    <div class="clue-number">
-        🎉 YOU FOUND THE TREASURE 🎉
-    </div>
-
-    <div class="clue">
-
-        You solved every clue…<br><br>
-
-        but the real treasure was you all along. ❤️
-
-        <br><br>
-
-        <strong>
-        Happy 1st Anniversary, Sheshi.
-        </strong>
-
-        <br><br>
-
-        Here's to our little family,
-        our little world,
-        and everything still waiting for us. ♾️
-
-    </div>
-
-    <a
-        class="button"
-        href="canvas_our-story-260818_1459.pdf"
-        target="_blank">
-
-        💌 OPEN YOUR SURPRISE
-
-    </a>
-
-    <div class="progress">
-        8 / 8 clues solved ❤️
-    </div>
-
-    ${TEST_MODE ? `
-        <div class="test">
-        TEST MODE — PDF UNLOCKED
+        <div class="clue-number">
+            🎉 YOU FOUND THE TREASURE 🎉
         </div>
-    ` : ""}
+
+        <div class="clue">
+
+            You solved every clue…<br><br>
+
+            but the real treasure was you all along. ❤️
+
+            <br><br>
+
+            <strong>
+            Happy 1st Anniversary, Sheshi.
+            </strong>
+
+            <br><br>
+
+            Here's to our little family,
+            our little world,
+            and everything still waiting for us. ♾️
+
+        </div>
+
+
+        <a
+            class="button"
+            href="canvas_our-story-260818_1459.pdf"
+            target="_blank">
+
+            💌 OPEN YOUR SURPRISE
+
+        </a>
+
+
+        <div class="progress">
+            8 / 8 clues solved ❤️
+        </div>
+
+
+        <div class="test">
+            TEST COMPLETE
+        </div>
 
     `;
 
@@ -743,14 +642,7 @@ document.addEventListener(
                 document.getElementById("answer");
 
             if (input) {
-
-                const index =
-                    TEST_MODE
-                    ? solved.length
-                    : 0;
-
-                checkAnswer(index);
-
+                checkAnswer();
             }
 
         }
@@ -763,7 +655,7 @@ document.addEventListener(
    START
    ===================================================== */
 
-showPage();
+showClue();
 
 
 /* =====================================================
